@@ -25,7 +25,7 @@ if ${INPUT_FORCE}; then
     _FORCE_OPTION='--force'
 fi
 
-if ${TAGS}; then
+if ${INPUT_TAGS}; then
     _TAGS='--tags'
 fi
 
@@ -36,4 +36,4 @@ remote_repo="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${REPOSITO
 echo "_TAGS: ${_TAGS}"
 echo "_FORCE_OPTIONS: ${_FORCE_OPTION}"
 echo "_FOLLOW_TAGS_OPTION: ${_FOLLOW_TAGS_OPTION}"
-git push "${remote_repo}" HEAD:${INPUT_BRANCH} ${_FOLLOW_TAGS_OPTION};
+git push "${remote_repo}" HEAD:${INPUT_BRANCH} $_FOLLOW_TAGS_OPTION $_FORCE_OPTION $_TAGS;
