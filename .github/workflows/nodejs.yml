@@ -31,7 +31,7 @@ jobs:
     #     FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
     # - run: node scripts/update-page.js
     - name: Test add file
-      run: echo $GITHUB_ACTION > test-action.txt
+      run: LC_ALL=C tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c 13 >dummy.txt
     - run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
