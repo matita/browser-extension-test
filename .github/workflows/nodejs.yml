@@ -35,8 +35,10 @@ jobs:
         git config --local user.name "GitHub Action"
         git add .
         git commit -m "Update pages with new Firefox build"
+    # - name: Push changes
+    #   uses: ad-m/github-push-action@master
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     tags: false
     - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        tags: false
+      run: git push "https://${{ secrets.GITHUB_ACTOR}}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ secrets.GITHUB_REPOSITORY }}.git" HEAD:master
