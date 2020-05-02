@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "webextension-toolbox dev",
     "build": "webextension-toolbox build",
-    "version": "node scripts/version.js"
+    "version": "node scripts/version.js",
+    "postversion": "git push && git push --tags"
   },
   "devDependencies": {
     "cheerio": "^1.0.0-rc.3",
