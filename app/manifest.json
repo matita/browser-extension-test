@@ -10,7 +10,7 @@
   },
   "__firefox__browser_specific_settings": {
     "gecko": {
-      "id": "browser-extension-text@matita.it",
+      "id": "browser-extension-test@matita.it",
       "updates_url": "https://matita.github.io/browser-extension-test/dist/firefox/updates.json"
     }
   },
