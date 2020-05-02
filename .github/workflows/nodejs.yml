@@ -31,6 +31,8 @@ jobs:
         FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
     - run: node scripts/update-page.js
     - run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git add .
         git commit -m "Update pages with new Firefox build"
     - name: Push changes
