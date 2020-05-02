@@ -29,3 +29,10 @@ jobs:
         FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
         FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
     - run: node scripts/update-page.js
+    - run: |
+        git add .
+        git commit -m "Update pages with new Firefox build"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
