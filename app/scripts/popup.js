@@ -1,3 +1,3 @@
 const { version } = require('../../package.json');
 
-document.getElementById('version').innerHTML = version;
+document.getElementById('version').innerText = version;
