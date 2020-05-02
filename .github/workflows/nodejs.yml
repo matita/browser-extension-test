@@ -42,4 +42,3 @@ jobs:
       uses: ./.github/actions/github-push-action
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        follow_tags: false
