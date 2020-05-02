@@ -3,7 +3,7 @@ const path = require('path');
 const cheerio = require('cheerio');
 
 const { version } = require('../package.json');
-const signedFileName = `browser-extension-test-${version}-an+fx.xpi`;
+const signedFileName = `browser_extension_test-${version}-an+fx.xpi`;
 const indexFilePath = path.resolve(__dirname, '../docs/index.html');
 const indexFileContent = '' + fs.readFileSync(indexFilePath);
 const $ = cheerio.load(indexFileContent);
