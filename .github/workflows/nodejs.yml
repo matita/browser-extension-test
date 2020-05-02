@@ -33,6 +33,7 @@ jobs:
     - name: Test add file
       run: LC_ALL=C tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_`{|}~' </dev/urandom | head -c 13 >dummy.txt
     - run: |
+        git config --local push.followTags false
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
