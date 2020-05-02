@@ -5,9 +5,10 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches:
+      - master
+    tags:
+      - v*
 
 jobs:
   build:
@@ -26,12 +27,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: yarn
     - run: yarn build firefox
-    - uses: trmcnvn/firefox-addon@v1
-      with:
-        # uuid is only necessary when updating an existing addon,
-        # omitting it will create a new addon
-        uuid: 'browser-extension-test@matita.it'
-        xpi: build/my-addon.xpi
-        manifest: manifest.json
-        api-key: ${{ secrets.FIREFOX_API_KEY }}
-        api-secret: ${{ secrets.FIREFOX_API_SECRET }}
+    - run: node scripts/sign-firefox.js
+      env:
+        FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
+        FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
+    - run: node scripts/update-page.js
