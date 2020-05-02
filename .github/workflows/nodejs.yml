@@ -19,17 +19,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: yarn
-    - run: yarn build firefox
-    - run: node scripts/sign-firefox.js
-      env:
-        FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
-        FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
-    - run: node scripts/update-page.js
+    # - name: Use Node.js ${{ matrix.node-version }}
+    #   uses: actions/setup-node@v1
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
+    # - run: yarn
+    # - run: yarn build firefox
+    # - run: node scripts/sign-firefox.js
+    #   env:
+    #     FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
+    #     FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
+    # - run: node scripts/update-page.js
+    - name: Test add file
+      run: echo $GITHUB_ACTION > test-action.txt
     - run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
