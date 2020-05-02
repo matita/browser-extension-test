@@ -1,6 +1,6 @@
 {
   "addons": {
-    "browser-extension-text@matita.it": {
+    "browser-extension-test@matita.it": {
       "updates": [
         {
           "version": "0.0.2",
