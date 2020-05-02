@@ -1,12 +1,1 @@
-{
-  "addons": {
-    "browser-extension-test@matita.it": {
-      "updates": [
-        {
-          "version": "0.0.2",
-          "update_link": "https://matita.github.io/builds/firefox/versions/"
-        }
-      ]
-    }
-  }
-}
+{"addons":{"browser-extension-test@matita.it":{"updates":[{"version":"0.0.2","update_link":"https://matita.github.io/builds/firefox/versions/"},{"version":"0.0.22","update_link":"https://matita.github.io/browser-extension-test/builds/firefox/versions/browser_extension_test-0.0.22-an+fx.xpi"}]}}}
