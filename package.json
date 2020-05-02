@@ -4,9 +4,11 @@
   "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   "scripts": {
     "dev": "webextension-toolbox dev",
-    "build": "webextension-toolbox build"
+    "build": "webextension-toolbox build",
+    "version": "node scripts/version.js"
   },
   "devDependencies": {
+    "dotenv": "^8.2.0",
     "web-ext": "^4.2.0",
     "webextension-toolbox": "latest"
   }
