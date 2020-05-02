@@ -38,7 +38,8 @@ jobs:
         git add .
         git commit -m "Update pages with new Firefox build"
     - name: Push changes
-      uses: matita/github-push-action@follow-tags
+      # uses: matita/github-push-action@follow-tags
+      uses: ./.github/actions/github-push-action
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         follow_tags: false
