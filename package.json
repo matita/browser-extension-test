@@ -8,6 +8,7 @@
     "version": "node scripts/version.js"
   },
   "devDependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
     "web-ext": "^4.2.0",
     "webextension-toolbox": "latest"
