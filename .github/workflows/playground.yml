@@ -20,13 +20,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Read package.json
-      id: package
-      outputs:
-        package:
-          description: Content of package.json
+      id: set-package
       run: echo "::set-output name=package::$(cat package.json)"
     - name: Display version
       env:
-        NPM_PACKAGE_VERSION: ${{ fromJson(steps.package.outputs.package).version }}
+        NPM_PACKAGE_VERSION: ${{ fromJson(steps.set-package.outputs.package).version }}
       run: echo "Version $NPM_PACKAGE_VERSION"
 
