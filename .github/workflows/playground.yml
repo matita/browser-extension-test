@@ -21,7 +21,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Read package.json
       id: set-package
-      run: echo "::set-output name=package::$(cat package.json)"
+      run: echo '::set-output name=package::$(cat package.json | tr "\n" "")'
     - name: Display version
       env:
         NPM_PACKAGE_VERSION: ${{ fromJson(steps.set-package.outputs.package).version }}
