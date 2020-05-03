@@ -29,8 +29,15 @@ jobs:
           | sed 's/[",]//g' \
           | tr -d '[[:space:]]')
         echo "::set-output name=version::$PACKAGE_VERSION"
+        PACKAGE_NAME=$(cat package.json \
+          | grep name \
+          | head -1 \
+          | awk -F: '{ print $2 }' \
+          | sed 's/[",]//g' \
+          | tr -d '[[:space:]]')
+        echo "::set-output name=name::$PACKAGE_NAME"
     - name: Display version
       env:
-        BUILD_PATH: 'packages/browser-extension-test.v${{ steps.package.outputs.version }}.chrome.zip'
+        BUILD_PATH: 'packages/${{ steps.package.outputs.name }}.v${{ steps.package.outputs.version }}.chrome.zip'
       run: echo "Path $BUILD_PATH"
 
