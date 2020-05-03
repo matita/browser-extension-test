@@ -20,10 +20,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Read package.json
-      id: set-package
-      run: echo '::set-output name=package::$(cat package.json | tr "\n" "")'
+      id: package
+      run: |
+        PACKAGE_VERSION=$(cat package.json \
+          | grep version \
+          | head -1 \
+          | awk -F: '{ print $2 }' \
+          | sed 's/[",]//g')
+        echo '::set-output name=version::$PACKAGE_VERSION'
     - name: Display version
       env:
-        NPM_PACKAGE_VERSION: ${{ fromJSON(steps.set-package.outputs.package).version }}
+        NPM_PACKAGE_VERSION: ${{ steps.package.outputs.version }}
       run: echo "Version $NPM_PACKAGE_VERSION"
 
