@@ -27,7 +27,7 @@ jobs:
           | head -1 \
           | awk -F: '{ print $2 }' \
           | sed 's/[",]//g')
-        echo '::set-output name=version::$PACKAGE_VERSION'
+        echo "::set-output name=version::$PACKAGE_VERSION"
     - name: Display version
       env:
         NPM_PACKAGE_VERSION: ${{ steps.package.outputs.version }}
