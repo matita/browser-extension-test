@@ -31,6 +31,6 @@ jobs:
         echo "::set-output name=version::$PACKAGE_VERSION"
     - name: Display version
       env:
-        NPM_PACKAGE_VERSION: ${{ steps.package.outputs.version }}
-      run: echo "Version $NPM_PACKAGE_VERSION"
+        BUILD_PATH: 'packages/browser-extension-test.v${{ steps.package.outputs.version }}.chrome.zip'
+      run: echo "Path $BUILD_PATH"
 
