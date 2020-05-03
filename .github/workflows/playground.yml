@@ -26,7 +26,8 @@ jobs:
           | grep version \
           | head -1 \
           | awk -F: '{ print $2 }' \
-          | sed 's/[",]//g')
+          | sed 's/[",]//g' \
+          | tr -d '[[:space:]]')
         echo "::set-output name=version::$PACKAGE_VERSION"
     - name: Display version
       env:
