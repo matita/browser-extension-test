@@ -41,13 +41,10 @@ jobs:
           | tr -d '[[:space:]]')
         echo "::set-output name=name::$PACKAGE_NAME"
     - run: yarn
-    - run: yarn build firefox
-    - run: node scripts/sign-firefox.js
-      env:
-        FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
-        FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
     - run: yarn build chrome
-    - uses: trmcnvn/chrome-addon@v2
+    # Using the commit from master at 2020-05-17 as ref to allow publish the Chrome extension as trustedTesters
+    - name: Publish Chrome extension
+      uses: trmcnvn/chrome-addon@e170f6eee6f4e1f337a1d54effb34b956748a8fd
       with:
         # extension is only necessary when updating an existing addon,
         # omitting it will create a new addon
@@ -57,7 +54,14 @@ jobs:
         client-id: ${{ secrets.CHROME_CLIENT_ID }}
         client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
         refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
-    - run: node scripts/update-page.js
+    - run: yarn build firefox
+    - name: Publish Firefox extension
+      run: node scripts/sign-firefox.js
+      env:
+        FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
+        FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
+    - name: Update GitHub Pages
+      run: node scripts/update-page.js
     - run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
