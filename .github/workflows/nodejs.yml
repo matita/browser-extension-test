@@ -23,12 +23,39 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - name: Read package.json
+      id: package
+      run: |
+        PACKAGE_VERSION=$(cat package.json \
+          | grep version \
+          | head -1 \
+          | awk -F: '{ print $2 }' \
+          | sed 's/[",]//g' \
+          | tr -d '[[:space:]]')
+        echo "::set-output name=version::$PACKAGE_VERSION"
+        PACKAGE_NAME=$(cat package.json \
+          | grep name \
+          | head -1 \
+          | awk -F: '{ print $2 }' \
+          | sed 's/[",]//g' \
+          | tr -d '[[:space:]]')
+        echo "::set-output name=name::$PACKAGE_NAME"
     - run: yarn
     - run: yarn build firefox
     - run: node scripts/sign-firefox.js
       env:
         FIREFOX_API_KEY: ${{ secrets.FIREFOX_API_KEY }}
         FIREFOX_API_SECRET: ${{ secrets.FIREFOX_API_SECRET }}
+    - run: yarn build chrome
+    - uses: trmcnvn/chrome-addon@v2
+      with:
+        # extension is only necessary when updating an existing addon,
+        # omitting it will create a new addon
+        extension: hmiedmhnnjkiojjfbbafjkmihkddllnk
+        zip: 'packages/${{ steps.package.outputs.name }}.v${{ steps.package.outputs.version }}.chrome.zip'
+        client-id: ${{ secrets.CHROME_CLIENT_ID }}
+        client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+        refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
     - run: node scripts/update-page.js
     - run: |
         git config --local user.email "action@github.com"
